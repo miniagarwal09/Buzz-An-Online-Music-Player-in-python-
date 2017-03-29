@@ -1,0 +1,25 @@
+{% extends "music/base.html" %}
+{% block body %}
+
+        <div class=" main form_body panel">
+        <table width="100%" class="table-hover table-responsive">
+                        <tr>
+                            <th colspan="8">Title</th>
+                            <th>Audio File</th>
+                            <th>Favorite</th>
+                            <th>Album</th>
+                        </tr>
+                        {% for song in songs %}
+                            <tr>
+                                <td colspan="8">{{ song.song_title }}</td>
+                                <td id="play_music">
+                                    <audio controls id='song_playback'><source src="{{ song.uploaded_file.url }}"></audio>
+                                </td>
+                                <td><span class="glyphicon glyphicon-star"></span> </td>
+                                <td>{{ song.album.album_title }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+        </div>
+
+{% endblock %}

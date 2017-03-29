@@ -1,0 +1,58 @@
+{% extends "music/base.html" %}
+{% block title %}
+    Album Detail
+{% endblock %}
+{% block body %}
+    <div class="main">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <img src="{{ album.album_logo.url }}" alt="Album Cover" class="img-responsive img-thumbnail img-rounded album_logo center-block">
+                <div class="album_detail">
+                    <h3>{{ album.album_title }} </h3>
+                    <h4>{{ album.artist }}</h4>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9">
+            <button class="btn btn-primary">View All</button>
+            <form action="{% url "music:add-song" album.id %}">
+                <button type="submit" class="btn">Add new song</button>
+            </form>
+            <form action="{% url "music:update-album" album.id %}" >
+                <button type="submit" class="btn">Update Album</button>
+            </form>
+                <div class="songs">
+                    <h1 >All Songs</h1>
+                        {% if error_message %}
+                            <h6 style="color:red">{{ error_message }}</h6>
+                        {% endif %}
+                    <table width="100%" class="table-striped table-hover table-responsive">
+                        <tr>
+                            <th colspan="8">Title</th>
+                            <th>Audio File</th>
+                            <th>Favorite</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for song_data in album.song_set.all %}
+                            <tr>
+                                <td colspan="8">{{ song_data.song_title }}</td>
+                                <td id="play_music">
+                                    <audio controls id='song_playback'><source src="{{ song_data.uploaded_file.url }}"></audio>
+                                </td>
+                                <td><span class="glyphicon glyphicon-star"></span> </td>
+                                <td>
+                                    <form action="{% url "music:delete-song" song_data.pk  %}" method="post">
+                                        {% csrf_token %}
+                                        <button  type="submit" class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

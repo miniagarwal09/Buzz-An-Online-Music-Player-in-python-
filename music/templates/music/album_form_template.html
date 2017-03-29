@@ -1,0 +1,11 @@
+{% for field in form %}
+    <div class="row">
+    <span class="col-lg-4">
+        <label class="" for="label{{ forloop.counter }}">{{ field.label_tag }}</label>
+    </span>
+    <span class="col-lg-4" id="label{{ forloop.counter }}">
+        {{ field }}
+    </span>
+    <span class="text-danger small">{{ field.errors}}</span>
+    </div>
+{% endfor %}

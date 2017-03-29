@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    ﻿
+    <link href="https://fonts.googleapis.com/css?family=Griffy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Satisfy|Roboto|slabo+27px|cinzel" rel="stylesheet">
+    <link type="text/css" href="{% static "music/style.css" %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static "music/play_music.js" %}"></script>
+    <meta charset="UTF-8">
+    <title>{% block title %}Buzz{% endblock %}</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topnavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-header">
+            <a href="{% url "music:index" %}" class="navbar-brand">Buzz</a>
+        </div>
+        <div class="collapse navbar-collapse " id="topnavbar">
+            <ul class="navbar-nav nav">
+                <li class="{% block active_albums %}active{% endblock %}">
+                    <a href="{% url "music:index" %}">
+                        <span class="glyphicon glyphicon-cd"></span>&nbsp;Albums
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "music:all-songs" %}">
+                        <span class="glyphicon glyphicon-music"></span>&nbsp;Songs
+                    </a>
+                </li>
+            </ul>
+            <form action="#" class="navbar-form navbar-left" method="get" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="search">&nbsp;
+                    <button type="submit" class="btn btn-default">Search!</button>
+                </div>
+            </form>
+            <ul class="navbar-nav nav navbar-right">
+                <li class="{% block active_add_album %}{% endblock %}">
+                    <a href="{% url "music:add-album" %}">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Add an Album
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-off"></span>&nbsp;Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block body %}
+{% endblock %}
+
+
+</body>
+</html>
