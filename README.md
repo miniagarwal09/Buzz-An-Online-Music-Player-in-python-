@@ -1,5 +1,5 @@
 # Buzz
-Music Player
+## Music Player
 Some Screen shots of online music player
 
 ![alt screenshot](https://github.com/miniagarwal09/untitled/blob/master/media/Screenshot%20(23).png)
